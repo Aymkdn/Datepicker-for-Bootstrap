@@ -5,4 +5,4 @@ However I found it doesn't work with Bootstrap v2.0.2+ and also it doesn't work 
 
 # Example
 
-See -
+See http://aymkdn.github.com/Datepicker-for-Bootstrap/ for examples.
