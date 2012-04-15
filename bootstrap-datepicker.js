@@ -345,7 +345,9 @@
 							date.setMonth(val - 1);
 							break;
 						case 'yy':
-							date.setFullYear(2000 + val);
+							// when we could use the full year instead of 2 digits
+							if (val < 100) date.setFullYear(2000 + val);
+							else date.setFullYear(val);
 							break;
 						case 'yyyy':
 							date.setFullYear(val);
