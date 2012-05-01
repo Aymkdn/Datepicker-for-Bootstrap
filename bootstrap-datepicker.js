@@ -33,7 +33,7 @@
 			this.element.on({
 				focus: $.proxy(this.show, this),
 				click: $.proxy(this.show, this),
-				blur: $.proxy(this.blur, this),
+				blur: $.proxy(this.hide, this),
 				keyup: $.proxy(this.update, this),
 				keydown: $.proxy(this.keydown, this)
 			});
@@ -58,6 +58,7 @@
 		constructor: Datepicker,
 		
 		show: function(e) {
+			this.update();
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
 			this.place();
