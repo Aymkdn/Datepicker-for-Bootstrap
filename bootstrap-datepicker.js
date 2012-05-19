@@ -199,6 +199,10 @@
 				$(document).off('mousedown', this.hide);
 			}
 			$('body').off('click',$.proxy(this.click, this));
+			this.element.trigger({
+                		type: 'hide',
+                		date: this.date
+            		});
 		},
 		click:function(e) {
 			e.stopPropagation();
