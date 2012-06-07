@@ -33,7 +33,7 @@
 			this.element.on({
 				focus: $.proxy(this.show, this),
 				click: $.proxy(this.show, this),
-				blur: $.proxy(this.hide, this),
+				blur: $.proxy(this.blur, this),
 				keyup: $.proxy(this.update, this),
 				keydown: $.proxy(this.keydown, this)
 			});
