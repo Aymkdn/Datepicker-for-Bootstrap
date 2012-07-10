@@ -8,3 +8,10 @@ FYI If you want more features or if you have some new requests, please look at t
 # Example
 
 See http://aymkdn.github.com/Datepicker-for-Bootstrap/ for examples.
+
+# New option
+
+You can also call datepicker() with "destroy" to remove the Datepicker from an element
+```javascript
+$('#id-element').datepicker("destroy"); // --> no more calendar when clicking on the element
+```
