@@ -24,24 +24,24 @@
 	var Datepicker = function(element, options){
 		this.element = $(element);
 		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||'mm/dd/yyyy');
-		this.picker = $(DPGlobal.template).appendTo('body').on('mousedown',$.proxy(this.mousedown, this)).on('click',$.proxy(this.click, this));
+		this.picker = $(DPGlobal.template).appendTo('body').on('mousedown.Datepicker',$.proxy(this.mousedown, this)).on('click.Datepicker',$.proxy(this.click, this));
 
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
 		
 		if (this.isInput) {
 			this.element.on({
-				focus: $.proxy(this.show, this),
-				click: $.proxy(this.show, this),
-				blur: $.proxy(this.blur, this),
-				keyup: $.proxy(this.update, this),
-				keydown: $.proxy(this.keydown, this)
+				"focus.Datepicker": $.proxy(this.show, this),
+				"click.Datepicker": $.proxy(this.show, this),
+				"blur.Datepicker": $.proxy(this.blur, this),
+				"keyup.Datepicker": $.proxy(this.update, this),
+				"keydow.Datepicker": $.proxy(this.keydown, this)
 			});
 		} else {
 			if (this.component){
-				this.component.on('click', $.proxy(this.show, this));
+				this.component.on('click.Datepicker', $.proxy(this.show, this));
 			} else {
-				this.element.on('click', $.proxy(this.show, this));
+				this.element.on('click.Datepicker', $.proxy(this.show, this));
 			}
 		}
 		
@@ -58,18 +58,17 @@
 		constructor: Datepicker,
 		
 		show: function(e) {
-			this.update();
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
 			this.place();
-			$(window).on('resize', $.proxy(this.place, this));
-			$('body').on('click', $.proxy(this.hide, this));
+			$(window).on('resize.Datepicker', $.proxy(this.place, this));
+			$('body').on('click.Datepicker', $.proxy(this.hide, this));
 			if (e) {
 				e.stopPropagation();
 				e.preventDefault();
 			}
 			if (!this.isInput) {
-				$(document).on('mousedown', $.proxy(this.hide, this));
+				$(document).on('mousedown.Datepicker', $.proxy(this.hide, this));
 			}
 			this.element.trigger({
 				type: 'show',
@@ -139,7 +138,7 @@
 			var nextMonth = new Date(prevMonth);
 			nextMonth.setDate(nextMonth.getDate() + 42);
 			nextMonth = nextMonth.valueOf();
-			var html = [];
+			html = [];
 			var clsName;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getDay() == this.weekStart) {
@@ -271,7 +270,9 @@
 				this.viewMode = Math.max(0, Math.min(2, this.viewMode + dir));
 			}
 			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
-		}
+		},
+		
+		destroy: function() { this.element.removeData("datepicker").off(".Datepicker") }
 	};
 	
 	$.fn.datepicker = function ( option ) {
@@ -346,9 +347,7 @@
 							date.setMonth(val - 1);
 							break;
 						case 'yy':
-							// when we could use the full year instead of 2 digits
-							if (val < 100) date.setFullYear(2000 + val);
-							else date.setFullYear(val);
+							date.setFullYear(2000 + val);
 							break;
 						case 'yyyy':
 							date.setFullYear(val);
