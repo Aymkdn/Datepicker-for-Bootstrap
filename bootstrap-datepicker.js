@@ -24,7 +24,7 @@
 	var Datepicker = function(element, options){
 		this.element = $(element);
 		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||'mm/dd/yyyy');
-		this.picker = $(DPGlobal.template).appendTo('body').on('mousedown.Datepicker',$.proxy(this.mousedown, this)).on('click.Datepicker',$.proxy(this.click, this));
+		this.picker = $(DPGlobal.template).appendTo('body').hide().on('mousedown.Datepicker',$.proxy(this.mousedown, this)).on('click.Datepicker',$.proxy(this.click, this));
 
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
@@ -191,13 +191,13 @@
 		
 		hide: function(e){
   		this.picker.hide();
-			$(window).off('resize', this.place);
+			$(window).off('resize.Datepicker', this.place);
 			this.viewMode = 0;
 			this.showMode();
 			if (!this.isInput) {
-				$(document).off('mousedown', this.hide);
+				$(document).off('mousedown.Datepicker', this.hide);
 			}
-			$('body').off('click',$.proxy(this.click, this));
+			$('body').off('click.Datepicker',$.proxy(this.click, this));
 		},
 		click:function(e) {
 			e.stopPropagation();
@@ -272,7 +272,7 @@
 			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
 		},
 		
-		destroy: function() { this.element.removeData("datepicker").off(".Datepicker") }
+		destroy: function() { this.element.removeData("datepicker").off(".Datepicker"); this.picker.remove() }
 	};
 	
 	$.fn.datepicker = function ( option ) {
