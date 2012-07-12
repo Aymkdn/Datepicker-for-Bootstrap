@@ -58,6 +58,7 @@
 		constructor: Datepicker,
 		
 		show: function(e) {
+		  $('div.datepicker.dropdown-menu').hide(); //make sure to hide all other calendars
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
 			this.place();
