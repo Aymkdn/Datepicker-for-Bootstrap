@@ -26,7 +26,7 @@
 		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||'mm/dd/yyyy');
 		this.picker = $(DPGlobal.template).appendTo('body').hide().on('mousedown.Datepicker',$.proxy(this.mousedown, this)).on('click.Datepicker',$.proxy(this.click, this));
 
-		this.isInput = this.element.is('input');
+		this.isInput = this.element.is('input') || this.element.is('textarea');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
 		
 		if (this.isInput) {
@@ -98,8 +98,9 @@
 		},
 		
 		update: function(){
+		  var date = this.element.val();
 			this.date = DPGlobal.parseDate(
-				this.isInput ? this.element.prop('value') : this.element.data('date'),
+				date ? date : this.element.data('date'),
 				this.format
 			);
 			this.viewDate = new Date(this.date);
@@ -332,6 +333,7 @@
 		},
 		parseDate: function(date, format) {
 		  var today=new Date();
+		  if (!date) date="";
 			var parts = date.split(format.separator),
 				date = new Date(today.getFullYear(),today.getMonth(),today.getDate(),0,0,0),
 				val;
