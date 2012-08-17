@@ -75,6 +75,8 @@
 				type: 'show',
 				date: this.date
 			});
+			// make sure we see the datepicker
+			$('.datepicker:visible')[0].scrollIntoView(false);
 		},
 		
 		setValue: function() {
