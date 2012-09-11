@@ -77,7 +77,7 @@
 				date: this.date
 			});
 			// make sure we see the datepicker
-			var elem = $('.datepicker:visible').eq(0);
+			var elem = this.picker;
 			var docScrollTop = $(document).scrollTop();
 			var winHeight = $(window).height();
 			var elemTop = elem.position().top;
