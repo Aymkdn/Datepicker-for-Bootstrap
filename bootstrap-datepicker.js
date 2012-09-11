@@ -47,6 +47,7 @@
 		
 		this.viewMode = 0;
 		this.weekStart = options.weekStart||this.element.data('date-weekstart')||0;
+		this.scroll = (options.scroll != undefined ? options.scroll : true);
 		this.weekEnd = this.weekStart == 0 ? 6 : this.weekStart - 1;
 		this.fillDow();
 		this.fillMonths();
@@ -76,7 +77,13 @@
 				date: this.date
 			});
 			// make sure we see the datepicker
-			$('.datepicker:visible')[0].scrollIntoView(false);
+			var elem = $('.datepicker:visible').eq(0);
+			var docScrollTop = $(document).scrollTop();
+			var winHeight = $(window).height();
+			var elemTop = elem.position().top;
+			var elemHeight = elem.height();
+			if (this.scroll && docScrollTop+winHeight<elemTop+elemHeight)
+        $(document).scrollTop(elemTop-elemHeight);
 		},
 		
 		setValue: function() {
