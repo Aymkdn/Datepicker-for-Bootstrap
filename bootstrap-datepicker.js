@@ -35,7 +35,7 @@
 				"click.Datepicker": $.proxy(this.show, this),
 				"blur.Datepicker": $.proxy(this.blur, this),
 				"keyup.Datepicker": $.proxy(this.update, this),
-				"keydow.Datepicker": $.proxy(this.keydown, this)
+				"keydown.Datepicker": $.proxy(this.keydown, this)
 			});
 		} else {
 			if (this.component){
@@ -83,7 +83,7 @@
 			var elemTop = elem.position().top;
 			var elemHeight = elem.height();
 			if (this.scroll && docScrollTop+winHeight<elemTop+elemHeight)
-        $(document).scrollTop(elemTop-elemHeight);
+                          $(document).scrollTop(elemTop-elemHeight);
 		},
 		
 		setValue: function() {
@@ -272,9 +272,9 @@
 			}
 		},
 		keydown:function(e) {
-      var keyCode = e.keyCode || e.which; 
-      if (keyCode == 9) this.hide(); // when hiting TAB, for accessibility
-    },
+                  var keyCode = e.keyCode || e.which; 
+                  if (keyCode == 9) this.hide(); // when hiting TAB, for accessibility
+                },
 	
 		showMode: function(dir) {
 			if (dir) {
