@@ -1,3 +1,5 @@
+/!\ ATTENTION : This fork must be used as it is. If you want to improve it or fix issues, I highly recommend you to look at this other fork https://github.com/eternicode/bootstrap-datepicker that has fixed lot of bugs and add several features. /!\
+
 # Datepicker for Bootstrap
 
 All the credits must be sent to Stefan who wrote this script (http://www.eyecon.ro/bootstrap-datepicker/).
