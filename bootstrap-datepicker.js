@@ -128,7 +128,7 @@
 		
 		fillMonths: function(){
 			var html = '';
-			var i = 0
+			var i = 0;
 			while (i < 12) {
 				html += '<span class="month">'+DPGlobal.dates.monthsShort[i++]+'</span>';
 			}
